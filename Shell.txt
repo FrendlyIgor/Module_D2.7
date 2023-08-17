@@ -1,0 +1,38 @@
+py manage.py shell
+>>>from news.models import *
+
+>>>user1 = User.objects.create(username='Mike', first_name='Frank')
+>>>Author.objects.create(authorUser=user1)
+>>>user2 = User.objects.create(username='Luke', first_name='Skywolker')
+>>>Author.objects.create(authorUser=user2)
+
+>>>Category.objects.create(name='IT')
+>>>Category.objects.create(name='Education')
+
+>>>Post.objects.create(author=Author.objects.get(authorUser=User.objects.get(username='Mike')), categoryType='ar', title='This story my lifetime', text='Hello, my name Kitti')  
+
+>>> Post.objects.create(author=Author.objects.get(authorUser=User.objects.get(username='Luke')), categoryType='ar', title='My father', text='His last words was be: Luke, I`m your father!')
+
+>>>p1 = Post.objects.get(pk=1) 
+>>> p2 = Post.objects.get(pk=2) 
+>>> p3 = Post.objects.get(pk=3)  
+
+>>>c1 = Category.objects.get(NameCategory='IT')
+>>> c2 = Category.objects.get(NameCategory='Education')
+>>>p1.postCategory.add(c1)
+>>> p2.postCategory.add(c1, c2)
+>>> p3.postCategory.add(c2)
+
+>>>Comment.objects.get(pk=1).like()
+>>> Comment.objects.get(pk=1).like()
+>>> Comment.objects.get(pk=1).like()
+>>> Comment.objects.get(pk=2).like() 
+>>> Comment.objects.get(pk=1).like() 
+>>> Comment.objects.get(pk=3).dislike() 
+
+>>> Author.objects.get(authorUser=User.objects.get(username='Mike')).update_rating()
+>>> Author.objects.get(authorUser=User.objects.get(username='Luke')).update_rating() 
+>>>Author.objects.get(authorUser=User.objects.get(username='Mike')).ratingAuthor 
+
+>>> best = Author.objects.all().order_by('-ratingAuthor').values('authorUser', 'ratingAuthor')[0]
+>>> print(best)
