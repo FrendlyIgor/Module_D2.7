@@ -36,3 +36,10 @@ py manage.py shell
 
 >>> best = Author.objects.all().order_by('-ratingAuthor').values('authorUser', 'ratingAuthor')[0]
 >>> print(best)
+>>>best = Post.objects.all().order_by('-rating').values('title', 'rating')[0] 
+>>> print(best)
+{'title': 'Python', 'rating': 3}
+
+>>>all = Post.objects.all().order_by('-rating').values('dataCategory', 'author', 'rating', 'text')[0] 
+>>> print(all) 
+{'dataCategory': datetime.datetime(2023, 8, 15, 20, 15, 26, 777553, tzinfo=datetime.timezone.utc), 'author': 2, 'rating': 3, 'text': 'Python - это простой в освоении, мощный язык программирования. Он обладает эффективными высокоуровневыми структурами данных и простым, но эффективным подходом к объектно-ориентированному программированию. Элегантный синтаксис Python и динамическая типизация вместе с его интерпретируемым характером делают его идеальным языком для написания сценариев и быстрой разработки приложений во многих областях на большинстве платформ.'}
